@@ -23,3 +23,4 @@ class Administration:
             else:
                 pass
         if not control_menu:
+            return self.panel_args.get(arg, "Invalid input")
