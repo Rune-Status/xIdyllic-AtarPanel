@@ -3,7 +3,7 @@ import subprocess as subproc
 from controllers import Files
 
 """It's important to make sure we don't leave vulnerabilites here. Using system/os.stat
-will allow us to return bit permissions for a file. We don't want know SUID exploits."""
+will allow us to return bit permissions for a file. We don't want no SUID exploits."""
 
 class Commands:
 

@@ -2,6 +2,9 @@ from pathlib import Path
 
 class Files:
 
+    def __init__(self):
+        pass
+
     def getFile(self, file):
         if Path(file).is_file():
             return file
