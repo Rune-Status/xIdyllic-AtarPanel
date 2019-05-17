@@ -1,2 +1,2 @@
-class Logging:
+class Logging: # Custom logging
     pass

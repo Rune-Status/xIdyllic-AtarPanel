@@ -7,11 +7,11 @@ class Main:
     command_controller = Commands.Commands()
     admin_controller = Administration.Administration()
 
-    def main(self):
-        log_path=''
-        ataraxia_containers = {}
-        arg_list = {}
+    log_path = ''
+    ataraxia_containers = {}
+    arg_list = {}
 
+    def main(self):
         self.file_controller.__init__()
         self.command_controller.__init__()
         self.admin_controller.__init__()

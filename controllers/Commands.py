@@ -8,7 +8,7 @@ will allow us to return bit permissions for a file. We don't want no SUID exploi
 
 class Commands:
 
-    invalid_commands = {'rm', 'rf', 'chmod'}
+    invalid_commands = {'rm', 'rf', 'chmod'} # Input sanitization
     command_line = input()
     files = Files.Files
 
