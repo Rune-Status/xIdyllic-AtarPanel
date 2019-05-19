@@ -1,9 +1,10 @@
 from pathlib import Path
 
+
 class Files:
 
     def __init__(self):
-        pass
+        self.path = None
 
     def getFile(self, file):
         if Path(file).is_file():
