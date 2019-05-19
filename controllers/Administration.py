@@ -1,3 +1,6 @@
+from controllers.files import Files
+from controllers.commands import Commands
+
 class Administration:
 
     def __init__(self):
@@ -10,6 +13,8 @@ class Administration:
         }
         self.panel_menu = '[1] {}\n[2] {}\n[3] {}\n'.format(self.panel_args[1], self.panel_args[2], self.panel_args[3])
         self.control_menu = '\n[1] {}\n[2] {}'.format(self.panel_args[4], self.panel_args[5])
+        self.file_controller = Files
+        self.command_controller = Commands
         self.start_menu()
 
     def start_menu(self):
@@ -18,13 +23,17 @@ class Administration:
             user_input = int(input("Enter menu number: "))
             if user_input == 1:
                 print("GAME LOGS")
-                exit()
+                self.file_handler().get_file('')
             if user_input == 2:
                 print("USER LOGS")
-                exit()
+                self.file_handler().get_file('')
             if user_input == 3:
                 print(self.control_menu)
-                exit()
+                if input() == 1:
+                    self.command_controller().get_command('shutdown')
+                if input() == 2:
+                    self.command_controller().get_command('restart')
+
         except (KeyError, ValueError, OSError) as err:
             #logger.log(err)
             print("Invalid input! Try again.\n")
