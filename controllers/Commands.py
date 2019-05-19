@@ -43,7 +43,7 @@ class Commands:
     def get_permissions(self, file):  # function will be used a lot for files.py.
         file_ids = self.system.stat(file) # Allows deeper checks rather than os.getuid, etc.
         for index, ids in enumerate(file_ids):
-                print(index, ids, self.permission_index[index])
+            print(index, ids, self.permission_index[index])
 
 
     def get_users(self, user=None):
