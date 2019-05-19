@@ -12,19 +12,19 @@ class Commands:
         self.files = Files
         self.subproc = subprocess
         self.system = os
-        self.users = self.system.system('cut -d: -f1 /etc/passwd')
         self.invalid_commands = ['rm', 'rf', 'chmod']  # Input sanitization
+        self.users = shlex.split('cut -d: -f1 /etc/passwd')
 
     def get_command(self, command=None):
         if command:
             if self.check_command(command):
-                self.subproc.Popen(command, shell=True)
+                self.subproc.Popen(command, shell=True, stderr=self.subproc.PIPE, stdout=self.subproc.PIPE)
             else:
                 return False
         if not command:
             command_line = input()
             if self.check_command(command_line):
-                self.subproc.Popen(command_line, shell=True)
+                self.subproc.Popen(command_line, shell=True, stderr=self.subproc.PIPE, stdout=self.subproc.PIPE)
             else:
                 return False
 
@@ -33,9 +33,14 @@ class Commands:
         file_stats = self.system.stat(file) # Allows deeper checks rather than os.getuid, etc.
 
 
-    def get_user(self, user=None):
+    def get_users(self, user=None):
         if user:
-            self.subproc.check_output()
+            user_command_output = self.subproc.Popen(self.users, stderr=self.subproc.PIPE, stdout=self.subproc.PIPE)
+            if user in user_command_output.communicate()[0].decode('utf-8'):
+                print('User Exists')
+                return True
+        if not user:
+            self.subproc.Popen(self.users)
 
     def check_command(self, cmd=None):
         if cmd in self.invalid_commands:

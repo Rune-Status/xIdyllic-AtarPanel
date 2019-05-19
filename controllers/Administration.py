@@ -1,13 +1,13 @@
 class Administration:
 
     def __init__(self):
-        self.control_menu = self.panel_args.get('Control_Menu', 'Invalid input.')
         self.panel_args = {
             1: 'Game Logs',
             2: 'User Logs',
             3: 'Server Control',
             'Control_Menu': ['Restart', 'Shutdown']
         }
+        self.control_menu = self.panel_args.get('Control_Menu', 'Invalid input.')
 
 
     def start_panel(self, arg):

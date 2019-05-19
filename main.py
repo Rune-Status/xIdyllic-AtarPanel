@@ -1,24 +1,22 @@
 'import sys, getopt << will be needed to implement sys.argv[0] for verbose options and debugging.'
-from controllers import Administration, Commands, Files
+from controllers import administration, commands, files
 
 class Main:
 
-    file_controller = Files.Files()
-    command_controller = Commands.Commands()
-    admin_controller = Administration.Administration()
+    file_controller = files.Files()
+    command_controller = commands.Commands()
+    admin_controller = administration.Administration()
 
     log_path = ''
     ataraxia_containers = {}
     arg_list = {}
 
-    def main(self):
-        self.file_controller.__init__()
-        self.command_controller.__init__()
-        self.admin_controller.__init__()
+    def __main__(self):
+        pass
 
     def help(self):
         pass
 
-if __name__ == "__main__":
-    'self.main.sysargv[arg_list:]'
-    pass
+
+if __name__ == '__main__':
+    Main().__main__()
