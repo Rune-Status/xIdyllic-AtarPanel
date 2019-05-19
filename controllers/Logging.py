@@ -3,7 +3,7 @@ import logging
 class Logging:
 
     def __init__(self):
-        self.log_directories = ['atar_panel_main.log', 'atar_panel_controllgers.log']
+        self.log_directories = ['atar_panel_main.log', 'atar_panel_controllers.log']
         self.logger = logging
         self.logger.basicConfig(level=self.logger.DEBUG,
                                 format='%(asctime)s %(levelname)-8s %(message)s',
