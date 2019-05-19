@@ -26,6 +26,7 @@ class Commands:
             8: 'st_mtime',
             9: 'st_ctime'
         }
+        self.bit_list = []
 
     def get_command(self, command=None):  # will need to use this in files.py eventually
         if command:
@@ -40,11 +41,17 @@ class Commands:
             else:
                 return False
 
-    def get_permissions(self, file):  # function will be used a lot for files.py.
+    def get_permission_bits(self, file):  # function will be used a lot for files.py.
         file_ids = self.system.stat(file) # Allows deeper checks rather than os.getuid, etc.
-        for index, ids in enumerate(file_ids):
-            print(index, ids, self.permission_index[index])
-
+        try:
+            for index, ids in enumerate(file_ids):
+                try:
+                    self.bit_list = [index, ids, self.permission_index[index]]
+                    print(self.bit_list)
+                except (IndexError, OverflowError, Exception) as err:
+                    print(err)
+        except Exception as err:
+            print(err)
 
     def get_users(self, user=None):
         if user:
