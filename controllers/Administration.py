@@ -5,20 +5,25 @@ class Administration:
             1: 'Game Logs',
             2: 'User Logs',
             3: 'Server Control',
-            'Control_Menu': ['Restart', 'Shutdown']
+            4: 'Restart',
+            5: 'Shutdown',
         }
-        self.control_menu = self.panel_args.get('Control_Menu', 'Invalid input.')
+        self.panel_menu = '[1] {}\n[2] {}\n[3] {}\n'.format(self.panel_args[1], self.panel_args[2], self.panel_args[3])
+        self.control_menu = '\n[1] {}\n[2] {}'.format(self.panel_args[4], self.panel_args[5])
+        self.start_menu()
 
-
-    def start_panel(self, arg):
-        return self.panel_args.get(arg, "Invalid input.")
-
-    def menu(self, arg, control_menu=False):
-        if control_menu:
+    def start_menu(self):
+        print(self.panel_menu)
+        user_input = int(input("Enter menu number: "))
+        if user_input == 1:
+            print("GAME LOGS")
+            exit()
+        if user_input == 2:
+            print("USER LOGS")
+            exit()
+        if user_input == 3:
             print(self.control_menu)
-            if self.panel_args[arg] == 'Restart' or self.panel_args[arg] == 'Shutdown':
-                return self.panel_args.get(self.control_menu)
-            else:
-                pass
-        if not control_menu:
-            return
+            exit()
+
+
+
