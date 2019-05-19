@@ -14,16 +14,21 @@ class Administration:
 
     def start_menu(self):
         print(self.panel_menu)
-        user_input = int(input("Enter menu number: "))
-        if user_input == 1:
-            print("GAME LOGS")
-            exit()
-        if user_input == 2:
-            print("USER LOGS")
-            exit()
-        if user_input == 3:
-            print(self.control_menu)
-            exit()
+        try:
+            user_input = int(input("Enter menu number: "))
+            if user_input == 1:
+                print("GAME LOGS")
+                exit()
+            if user_input == 2:
+                print("USER LOGS")
+                exit()
+            if user_input == 3:
+                print(self.control_menu)
+                exit()
+        except (KeyError, ValueError, OSError) as err:
+            #logger.log(err)
+            print("Invalid input! Try again.\n")
+            self.start_menu()
 
 
 
