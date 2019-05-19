@@ -14,8 +14,20 @@ class Commands:
         self.system = os
         self.invalid_commands = ['rm', 'rf', 'chmod']  # Input sanitization
         self.users = shlex.split('cut -d: -f1 /etc/passwd')
+        self.permission_index = {
+            0: 'st_mode',
+            1: 'st_ino',
+            2: 'st_dev',
+            3: 'st_nlink',
+            4: 'st_uid',
+            5: 'st_gid',
+            6: 'st_size',
+            7: 'st_atime',
+            8: 'st_mtime',
+            9: 'st_ctime'
+        }
 
-    def get_command(self, command=None):
+    def get_command(self, command=None):  # will need to use this in files.py eventually
         if command:
             if self.check_command(command):
                 self.subproc.Popen(command, shell=True, stderr=self.subproc.PIPE, stdout=self.subproc.PIPE)
@@ -28,9 +40,10 @@ class Commands:
             else:
                 return False
 
-    def get_permissions(self, file):
-        file_permission = None
-        file_stats = self.system.stat(file) # Allows deeper checks rather than os.getuid, etc.
+    def get_permissions(self, file):  # function will be used a lot for files.py.
+        file_ids = self.system.stat(file) # Allows deeper checks rather than os.getuid, etc.
+        for index, ids in enumerate(file_ids):
+                print(index, ids, self.permission_index[index])
 
 
     def get_users(self, user=None):
@@ -41,6 +54,7 @@ class Commands:
                 return True
         if not user:
             self.subproc.Popen(self.users)
+            exit()
 
     def check_command(self, cmd=None):
         if cmd in self.invalid_commands:
