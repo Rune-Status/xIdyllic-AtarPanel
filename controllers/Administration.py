@@ -55,6 +55,7 @@ class Administration:
             self.server_menu[3],
         )
 
+        self.target_user = None
         self.file_controller = Files.Files
         self.command_controller = Commands.Commands
 
@@ -90,7 +91,7 @@ class Administration:
         user_input = int(input("Enter menu numbr >> "))
         get_menu = self.user_log_menu.get(user_input)
         if get_menu == self.user_log_menu[1]:
-            pass
+            return self.target_user # these menus will only return values and will be processed in main.
         if get_menu == self.user_log_menu[2]:
             pass
         if get_menu == self.user_log_menu[3]:
