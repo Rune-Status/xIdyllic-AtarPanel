@@ -39,18 +39,38 @@ class Files:
         except (PermissionError, OSError, FileNotFoundError) as err:
             print(err)
 
-    def read_file(self, file, grep_user=None):
-        if grep_user:
-            for line in open(file, 'rt'):
-                line.rstrip()
-                self.subproc.check_call(['grep', '-a', grep_user, file])
-                break
-        if not grep_user:
-            for line in open(file, 'rt'):
-                line.rstrip()
-                self.subproc.check_call(['tail', '-500', file])
-                break
+    def read_ip_file(self, file, user=None):
+        if user:
+            try:
+                for line in open(file, 'rt'):
+                    line.rstrip()
+                    self.subproc.check_call(['grep', '-a', user, file])
+                    break
+            except (OSError, PermissionError, FileNotFoundError) as err:
+                print(err)
+        if not user:
+            try:
+                for line in open(file, 'rt'):
+                    line.rstrip()
+                    self.subproc.check_call(['tail', '-500', file])
+                    break
+            except (OSError, PermissionError, FileNotFoundError) as err:
+                print(err)
 
+    def read_log_file(self, path, user):
+        if not path and user:
+            print("Missing arguments!")
+            exit()
+        if path and user:
+            try:
+                complete_path = path + user
+                for line in open(complete_path, 'rt'):
+                    line.rstrip()
+                    self.subproc.check_call(['tail', '-200', complete_path])
+                    break
+            except (OSError, PermissionError, FileNotFoundError) as err:
+                print(err)
+                
     def backup_operation(self, directories):
         pass
 
