@@ -1,43 +1,52 @@
-from controllers.files import Files
-from controllers.commands import Commands
+from controllers import Files
+from controllers import Commands
 
 class Administration:
 
     def __init__(self):
-        self.panel_args = {
+        self.main_menu = {
             1: 'Game Logs',
             2: 'User Logs',
-            3: 'Server Control',
-            4: 'Restart',
-            5: 'Shutdown',
+            3: 'Server Control'
         }
-        self.panel_menu = '[1] {}\n[2] {}\n[3] {}\n'.format(self.panel_args[1], self.panel_args[2], self.panel_args[3])
-        self.control_menu = '\n[1] {}\n[2] {}'.format(self.panel_args[4], self.panel_args[5])
-        self.file_controller = Files
-        self.command_controller = Commands
-        self.start_menu()
+        self.user_log_menu = {
+            1: 'IP Logs',
+            2: 'Drop Logs',
+            3: 'PM Logs',
+            4: 'Trade Logs',
+            5: 'Chat Logs',
+            6: 'Donation Logs',
+            7: 'GE Logs',
+            8: 'Item Pickup Logs',
+            9: 'Stake Logs'
+        }
+        self.server_menu = {
+            1: 'Restart',
+            2: 'Shutdown',
+            3: 'Command Logs'
+        }
+
+        self.main_men = '[1] {}\n[2] {}\n[3] {}\n'.format(
+            self.main_menu[1],
+            self.main_menu[2],
+            self.main_menu[3]
+        )
+        self.user_men = '[1] {}\n[2] {}\n[3] {}\n[4] {}\n[5] {}\n[6] {}\n[7] {}\n[8] {}\n[9] {}\n'.format(
+            self.user_log_menu[1],
+            self.user_log_menu[2],
+            self.user_log_menu[3],
+            self.user_log_menu[4],
+            self.user_log_menu[5],
+            self.user_log_menu[6],
+            self.user_log_menu[7],
+            self.user_log_menu[8],
+            self.user_log_menu[9]
+        )
+        self.file_controller = Files.Files
+        self.command_controller = Commands.Commands
 
     def start_menu(self):
-        print(self.panel_menu)
-        try:
-            user_input = int(input("Enter menu number: "))
-            if user_input == 1:
-                print("GAME LOGS")
-                self.file_handler().get_file('')
-            if user_input == 2:
-                print("USER LOGS")
-                self.file_handler().get_file('')
-            if user_input == 3:
-                print(self.control_menu)
-                if input() == 1:
-                    self.command_controller().get_command('shutdown')
-                if input() == 2:
-                    self.command_controller().get_command('restart')
-
-        except (KeyError, ValueError, OSError) as err:
-            #logger.log(err)
-            print("Invalid input! Try again.\n")
-            self.start_menu()
+        pass
 
 
 
