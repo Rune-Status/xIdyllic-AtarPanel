@@ -57,3 +57,7 @@ class Commands:
             return False
         else:
             return True
+
+    def clear_screen(self):
+        self.subproc.call('clear')
+        return True
