@@ -43,7 +43,12 @@ class Files:
         if grep_user:
             for line in open(file, 'rt'):
                 line.rstrip()
-                self.subproc.check_call(['/bin/grep', '-a', grep_user, file])
+                self.subproc.check_call(['grep', '-a', grep_user, file])
+                break
+        if not grep_user:
+            for line in open(file, 'rt'):
+                line.rstrip()
+                self.subproc.check_call(['tail', '-500', file])
                 break
 
     def backup_operation(self, directories):
