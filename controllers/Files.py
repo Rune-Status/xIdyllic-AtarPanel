@@ -1,5 +1,5 @@
 from pathlib import Path
-import shutil, re, subprocess
+import shutil, subprocess
 
 # This class will need to rely heavily on commands.py for checking permissions and such.
 
@@ -70,7 +70,7 @@ class Files:
                     break
             except (OSError, PermissionError, FileNotFoundError) as err:
                 print(err)
-                
+
     def backup_operation(self, directories):
         pass
 
