@@ -1,6 +1,6 @@
 from controllers import Files
 from controllers import Commands
-import time
+import sys
 
 class Administration:
 
@@ -86,6 +86,7 @@ class Administration:
             self.start_menu()
 
     def user_menu(self):
+        self.command_controller().flush_std_buffers(stdin=True, stdout=True)
         self.command_controller().clear_screen()
         print(self.user_men)
         user_input = int(input("Enter menu numbr >> "))
@@ -116,7 +117,7 @@ class Administration:
     def game_log_menu(self):
         self.command_controller().clear_screen()
         print(self.user_men)
-        user_input = int(input("Enter menu numbr >> "))
+        user_input = int(input("Enter menu number >> "))
         pass
 
 

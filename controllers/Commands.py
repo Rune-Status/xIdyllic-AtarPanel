@@ -1,6 +1,7 @@
 import os
 import shlex
 import subprocess # If you're going to use check_call, don't use stdour or stderr. Deadlocking threads is a no-go.
+import sys
 from controllers import Files
 
 """It's important to make sure we don't leave vulnerabilites here. Using system/os.stat
@@ -61,3 +62,22 @@ class Commands:
     def clear_screen(self):
         self.subproc.call('clear')
         return True
+
+    def flush_std_buffers(self, stdin=False, stdout=False):
+        stdin = sys.__stdin__
+        stdout = sys.__stdout__
+
+        try:
+            if stdin:
+                stdin.flush()
+                print("STDIN buffers flushed.")
+            if stdout:
+                stdout.flush()
+                print("STDOUT buffers flushed.")
+            if stdout and stdin:
+                stdin.flush()
+                stdout.flush()
+                print("STDIN and STDOUT buffers flushed.")
+        except (SystemError, IOError) as err:
+            print(err)
+

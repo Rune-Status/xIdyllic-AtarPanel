@@ -71,6 +71,18 @@ class Files:
             except (OSError, PermissionError, FileNotFoundError) as err:
                 print(err)
 
+    def compare_files(self, log_path, user_one, user_two):
+        complete_path_one = log_path + user_one + '.txt'
+        complete_path_two = log_path + user_two + '.txt'
+
+        with open(complete_path_one, 'rt') as file, open(complete_path_two, 'rt') as file2:
+            for user_one in file:
+                for user_two in file2:
+                    user_one.rstrip()
+                    user_two.rstrip()
+                    self.subproc.call([], shell=True)
+                    break
+
     def backup_operation(self, directories):
         pass
 
