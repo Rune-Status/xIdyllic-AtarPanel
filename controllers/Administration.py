@@ -1,6 +1,7 @@
 from controllers import Files
 from controllers import Commands
-import sys
+from consolemenu import *
+from consolemenu.items import *
 
 class Administration:
 
