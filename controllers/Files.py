@@ -43,18 +43,12 @@ class Files:
     def read_ip_file(self, file, user=None):
         if user:
             try:
-                for line in open(file, 'rt'):
-                    line.rstrip()
-                    self.subproc.check_call(['grep', '-a', user, file])
-                    break
+                self.subproc.check_call(['grep', '-a', user, file])
             except (OSError, PermissionError, FileNotFoundError) as err:
                 print(err)
         if not user:
             try:
-                for line in open(file, 'rt'):
-                    line.rstrip()
-                    self.subproc.check_call(['tail', '-500', file])
-                    break
+                self.subproc.check_call(['tail', '-500', file])
             except (OSError, PermissionError, FileNotFoundError) as err:
                 print(err)
 
