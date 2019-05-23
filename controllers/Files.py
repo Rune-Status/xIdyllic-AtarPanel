@@ -81,6 +81,8 @@ class Files:
     def tail_file(self, lines_to_tail, file):
         if int(lines_to_tail) < 0:
             self.subproc.check_call(['tail', str(lines_to_tail), file])
+        if int(lines_to_tail) > 0:
+            raise ValueError("Needs to be an argument, not just a number.")
 
     def backup_operation(self, directories):
         pass
