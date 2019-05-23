@@ -10,6 +10,7 @@ class Files:
         self.path = None
         self.file_util = shutil
         self.path_util = Path
+        self.log_paths = ['logs/']
 
     def get_file(self, file):
         try:
@@ -21,7 +22,7 @@ class Files:
 
     def get_dir(self, directory):
         try:
-            if Path(directory).is_absolute():
+            if self.path_util().is_absolute():
                 print(directory)
                 return
         except (FileNotFoundError, PermissionError, OSError) as err:
@@ -59,29 +60,27 @@ class Files:
 
     def read_log_file(self, path, user):
         if not path and user:
-            print("Missing arguments!")
-            exit()
+            pass
         if path and user:
             try:
-                complete_path = path + user
-                for line in open(complete_path, 'rt'):
-                    line.rstrip()
-                    self.subproc.check_call(['tail', '-200', complete_path])
-                    break
+                complete_path = path + user + '.txt'
+                self.tail_file(complete_path)
             except (OSError, PermissionError, FileNotFoundError) as err:
                 print(err)
 
-    def compare_files(self, log_path, user_one, user_two):
-        complete_path_one = log_path + user_one + '.txt'
-        complete_path_two = log_path + user_two + '.txt'
+    def compare_users(self, user1, user2):
+        user1 = user1 + '.txt'
+        user2 = user2 + '.txt'
+        if self.path_util(self.log_paths[0] + user1).is_file():
+            print(user1, ' exists')
+            if self.path_util(self.log_paths[0] + user2).is_file():
+                print(user2, ' exists')
+                self.tail_file('-10', self.log_paths[0] + user1)
+                self.tail_file('-10', self.log_paths[0] + user2)
 
-        with open(complete_path_one, 'rt') as file, open(complete_path_two, 'rt') as file2:
-            for user_one in file:
-                for user_two in file2:
-                    user_one.rstrip()
-                    user_two.rstrip()
-                    self.subproc.call([], shell=True)
-                    break
+    def tail_file(self, lines_to_tail, file):
+        if int(lines_to_tail) < 0:
+            self.subproc.check_call(['tail', str(lines_to_tail), file])
 
     def backup_operation(self, directories):
         pass
