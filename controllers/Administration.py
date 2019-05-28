@@ -37,7 +37,7 @@ class Administration:
         self.file_controller = Files.Files
         self.command_controller = Commands.Commands
         self.menu = ConsoleMenu
-        self.start_selection = SelectionMenu.get_selection(self.main_menu, "Ataraxia Control Panel", "Latest development update: " + self.latest_update)
+        self.start_selection = SelectionMenu.get_selection(self.main_menu, "Control Panel", "Latest development update: " + self.latest_update)
 
     def start_menu(self):
         self.menu().show()

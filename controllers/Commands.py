@@ -29,8 +29,17 @@ class Commands:
         }
         self.bit_list = []
 
-    def get_permission_bits(self, file):  # function will be used a lot for files.py.
-        file_ids = self.system.stat(file) # Allows deeper checks rather than os.getuid, etc.
+
+    def clear_screen(self):
+        self.subproc.call('clear')
+        return True
+
+    def grep_file(self, file, item_to_grep):
+        if file and item_to_grep:
+            self.subproc.check_call(['grep', '-a', file, item_to_grep])
+
+    def get_permission_bits(self, file):
+        file_ids = self.system.stat(file)
         try:
             for index, ids in enumerate(file_ids):
                 try:
@@ -58,10 +67,6 @@ class Commands:
             return False
         else:
             return True
-
-    def clear_screen(self):
-        self.subproc.call('clear')
-        return True
 
     def flush_std_buffers(self, stdin=False, stdout=False):
         stdin = sys.__stdin__
