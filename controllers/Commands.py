@@ -34,9 +34,12 @@ class Commands:
         self.subproc.call('clear')
         return True
 
-    def grep_file(self, file, item_to_grep):
+    def grep_file(self, item_to_grep, file):
         if file and item_to_grep:
-            self.subproc.check_call(['grep', '-a', file, item_to_grep])
+            self.subproc.check_call(['grep', '-a', item_to_grep, file])
+
+    def tail_file(self, file):
+        self.subproc.check_call(['tail', '-5', file])
 
     def get_permission_bits(self, file):
         file_ids = self.system.stat(file)
@@ -71,7 +74,6 @@ class Commands:
     def flush_std_buffers(self, stdin=False, stdout=False):
         stdin = sys.__stdin__
         stdout = sys.__stdout__
-
         try:
             if stdin:
                 stdin.flush()

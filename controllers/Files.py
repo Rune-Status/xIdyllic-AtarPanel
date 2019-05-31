@@ -30,17 +30,23 @@ class Files:
     def remove_file(self, file):
         pass
 
-    def read_address_log(self, user=None, ip=None):
+    def read_address_log(self, user=None):
         if user:
             self.command_controller().grep_file(self.log_path[0] + self.log_files[0], user)
 
     def read_log_file(self, user, logtype):
         if user and logtype:
             for user in open(self.log_path[0] + logtype + user + '.txt', 'rt'):
-                print(user, end='')
+                if logtype in self.log_dirs:
+                    print(user, end='')
 
-    def compare_users(self, user1, user2):
-        pass
+    def compare_users(self, logtype, user1, user2):
+        for element in self.log_dirs:
+            if logtype in element:
+                self.command_controller().tail_file(self.log_path[0] + logtype + user1 + '.txt')
+                print()
+                self.command_controller().tail_file(self.log_path[0] + logtype + user2 + '.txt')
+                break
 
     def backup_operation(self, directories):
         pass
