@@ -18,16 +18,16 @@ class Main:
     administration = Administration.Administration
 
     if __name__ == '__main__':
-        #print("Initing commands controller")
-        #commands_controller().__init__()
-        #print("Initing log controller")
-        #log_controller().__init__()
-        #print("Initing file controller")
-        #file_controller().__init__()
-        #print("Initing Admin panel")
-        #administration().__init__()
+        print("Initing commands controller")
+        commands_controller().__init__()
+        print("Initing log controller")
+        log_controller().__init__()
+        print("Initing file controller")
+        file_controller().__init__()
+        print("Initing Admin panel")
+        administration().__init__()
         print("Starting Admin menu\n")
-        file_controller().read_address_log('slither')
+        administration().start_main_menu()
 
     def help(self):
         pass
