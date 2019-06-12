@@ -39,7 +39,7 @@ class Commands:
             self.subproc.check_call(['grep', '-a', item_to_grep, file])
 
     def tail_file(self, file):
-        self.subproc.check_call(['tail', '-5', file])
+        self.subproc.check_call(['tail', '-10', file])
 
     def get_permission_bits(self, file):
         file_ids = self.system.stat(file)

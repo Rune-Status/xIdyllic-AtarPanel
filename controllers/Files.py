@@ -11,18 +11,18 @@ class Files:
         self.command_controller = Commands.Commands
         self.path = None
         self.file_util = shutil
-        self.path_util = Path
+        self.path_util = Path('.')
         self.log_path = ['/home/game/server/data/playersaves/logs/']
         self.log_files = ['AddressLogs.txt', 'donationLogs.txt']
-        self.log_dirs = ['commandlogs/',
+        self.log_dirs = ['iplogs/',
                          'droplogs/',
-                         'iplogs/',
-                         'stakelogs/',
+                         'pmlogs/',
+                         'tradelogs/',
                          'chatlogs/',
                          'grandexchangelogs/',
                          'itempickuplogs/',
-                         'pmlogs/',
-                         'tradelogs/']
+                         'stakelogs/',
+                         'commandlogs/']
 
     def copy_file(self, source_file, destination_path):
         pass
@@ -35,18 +35,21 @@ class Files:
             self.command_controller().grep_file(self.log_path[0] + self.log_files[0], user)
 
     def read_log_file(self, user, logtype):
+        full_path = self.log_path[0] + logtype + user + '.txt'
         if user and logtype:
-            for user in open(self.log_path[0] + logtype + user + '.txt', 'rt'):
-                if logtype in self.log_dirs:
-                    print(user, end='')
+            for dirs in self.log_dirs:
+                if logtype in dirs:
+                    self.command_controller().tail_file(full_path)
 
     def compare_users(self, logtype, user1, user2):
-        for element in self.log_dirs:
-            if logtype in element:
-                self.command_controller().tail_file(self.log_path[0] + logtype + user1 + '.txt')
-                print()
-                self.command_controller().tail_file(self.log_path[0] + logtype + user2 + '.txt')
-                break
+        full_path = self.log_path[0] + logtype
+        if logtype and user1 and user2:
+            for dirs in self.log_dirs:
+                if logtype in dirs:
+                    self.command_controller().tail_file(full_path + user1 + '.txt')
+                    print()
+                    self.command_controller().tail_file(full_path + user2 + '.txt')
+                    break
 
     def backup_operation(self, directories):
         pass
