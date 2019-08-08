@@ -1,5 +1,5 @@
 'import sys, getopt << will be needed to implement sys.argv[0] for verbose options and debugging.'
-from controllers import Administration
+from controllers import Menu
 from controllers import Commands
 from controllers import Files
 from controllers import Logging
@@ -15,7 +15,7 @@ class Main:
     file_controller = Files.Files
     commands_controller = Commands.Commands
     log_controller = Logging.Logging
-    administration = Administration.Administration
+    administration = Menu.Menu
 
     if __name__ == '__main__':
         print("Initing commands controller")
@@ -27,7 +27,7 @@ class Main:
         print("Initing Admin panel")
         administration().__init__()
         print("Starting Admin menu\n")
-        administration().start_main_menu()
+        administration().start_menu()
 
     def help(self):
         pass
