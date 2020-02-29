@@ -9,6 +9,7 @@ class Menu:
             'User Logs',
             'Server Control'
         ]
+
         self.game_log_menu = [
             'IP',
             'Drop',
@@ -57,10 +58,18 @@ class Menu:
     def get_user_choice(self):
         return int(input("\nSelect menu number: "))
 
-    def get_log(self, logtype):
-        self.file_controller().read_log_file(str(input("Enter the username you wish to search: ")), logtype)
+    def get_player_log(self, logtype):
+        self.file_controller().read_log_file(logtype, str(input("Enter the username you wish to search: ")))
         input('Press enter to go back when you are ready. This will refresh the current session.')
-        return self.game_menu()
+        self.set_menu('game')
+
+    def get_staff_log(self):
+        staff_rank = str(input("Please enter the rank of the staff member [support, mod, admin]: "))
+        staff_user = str(input("Please enter the username of the staff member: "))
+        self.file_controller().read_log_file(self.file_controller().log_dirs[8] + staff_rank
+                                             + '/', staff_user)
+        input('Press enter to go back when you are ready. This will refresh the current session.')
+        self.set_menu('game')
 
     def set_menu(self, menu_select):
         if menu_select == 'game':
@@ -80,25 +89,25 @@ class Menu:
         user_choice = self.get_user_choice()
 
         if user_choice == 0:
-            self.get_log(self.file_controller().log_dirs[0])
+            self.get_player_log(self.file_controller().log_dirs[0])
         elif user_choice == 1:
-            self.get_log(self.file_controller().log_dirs[1])
+            self.get_player_log(self.file_controller().log_dirs[1])
         elif user_choice == 2:
-            self.get_log(self.file_controller().log_dirs[2])
+            self.get_player_log(self.file_controller().log_dirs[2])
         elif user_choice == 3:
-            self.get_log(self.file_controller().log_dirs[3])
+            self.get_player_log(self.file_controller().log_dirs[3])
         elif user_choice == 4:
-            self.get_log(self.file_controller().log_dirs[4])
+            self.get_player_log(self.file_controller().log_dirs[4])
         elif user_choice == 5:
-            self.get_log(self.file_controller().log_dirs[5])
+            self.get_player_log(self.file_controller().log_dirs[5])
         elif user_choice == 6:
-            self.get_log(self.file_controller().log_dirs[6])
+            self.get_player_log(self.file_controller().log_dirs[6])
         elif user_choice == 7:
-            self.get_log(self.file_controller().log_dirs[7])
+            self.get_player_log(self.file_controller().log_dirs[7])
         elif user_choice == 8:
-            self.get_log(self.file_controller().log_dirs[8])
+            self.get_staff_log()
         elif user_choice == 9:
-            self.get_log(self.file_controller().log_dirs[9])
+            self.get_player_log(self.file_controller().log_dirs[9])
         elif user_choice == 10:
             self.start_menu()
         else:

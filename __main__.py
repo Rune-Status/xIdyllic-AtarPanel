@@ -1,4 +1,3 @@
-'import sys, getopt << will be needed to implement sys.argv[0] for verbose options and debugging.'
 from controllers import Menu
 from controllers import Commands
 from controllers import Files

@@ -22,7 +22,10 @@ class Files:
                          'grandexchangelogs/',
                          'itempickuplogs/',
                          'stakelogs/',
-                         'commandlogs/']
+                         'commandlogs/',
+                         'admin/',
+                         'mod/',
+                         'support/']
 
     def copy_file(self, source_file, destination_path):
         pass
@@ -34,8 +37,9 @@ class Files:
         if user:
             self.command_controller().grep_file(self.log_path[0] + self.log_files[0], user)
 
-    def read_log_file(self, user, logtype):
+    def read_log_file(self, logtype, user):
         full_path = self.log_path[0] + logtype + user + '.txt'
+        print(full_path)
         if user and logtype:
             for dirs in self.log_dirs:
                 if logtype in dirs:
